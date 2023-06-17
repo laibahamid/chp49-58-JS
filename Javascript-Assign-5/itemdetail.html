@@ -1,0 +1,106 @@
+<!-- ============================Item Detail=========================================================  -->
+<h2>2. Item details</h2>
+<h3>Let's Shop</h3>
+ <style>
+  .car-details {
+    display: none;
+  }
+</style> 
+</head>
+<body>
+<div>
+  <label for="carName">Car Name:</label>
+  <input type="text" id="carName">
+</div><br>
+<div>
+  <label for="carBrand">Car Brand:</label>
+  <input type="text" id="carBrand">
+</div><br>
+<div>
+  <label for="carColor">Car Color:</label>
+  <input type="text" id="carColor">
+</div><br>
+<div>
+  <label for="carModel">Car Model:</label>
+  <input type="text" id="carModel">
+</div><br>
+<div>
+  <label for="carhp">Car Horsepower:</label>
+  <input type="text" id="carhp">
+</div><br>
+<div>
+  <label for="carFuel">Fuel Efficiency:</label>
+  <input type="text" id="carFuel">
+</div><br>
+<button onclick="addCar()">Add Car</button><br>
+
+<div id="carList"></div>
+
+<script>
+  function addCar() {
+    var carName = document.getElementById("carName").value;
+    var carBrand = document.getElementById("carBrand").value;
+    var carColor = document.getElementById("carColor").value;
+    var carModel = document.getElementById("carModel").value;
+    var carhp = document.getElementById("carhp").value;
+    var carFuel = document.getElementById("carFuel").value;
+
+    var car = {
+      name: carName,
+      brand: carBrand,
+      color: carColor,
+      model : carModel,
+      hp : carhp,
+      fuel : carFuel
+    };
+
+    var carList = document.getElementById("carList");
+
+    var carDiv = document.createElement("div");
+
+    var carNameHeading = document.createElement("h3");
+    carNameHeading.textContent = carName;
+
+    var carBrandPara = document.createElement("p");
+    carBrandPara.textContent = "Brand: " + carBrand;
+
+    var carColorPara = document.createElement("p");
+    carColorPara.textContent = "Color: " + carColor;
+
+    carColorPara.classList.add("car-details");
+
+    var carModelPara = document.createElement("p")
+    carModelPara.textContent = "Model: " + carModel;
+
+    var carhpPara = document.createElement("p")
+    carhpPara.textContent = "Horsepower: " + carhp;
+
+    var carFuelPara = document.createElement("p")
+    carFuelPara.textContent = "Fuel: " + carFuel;
+
+    var readMoreButton = document.createElement("button");
+    readMoreButton.textContent = "Read more";
+    readMoreButton.addEventListener("click", function() {
+      carBrandPara.classList.toggle("car-details");
+      carColorPara.classList.toggle("car-details");
+      carModelPara .classList.toggle("car-details");
+      carhpPara .classList.toggle("car-details");
+      carFuelPara .classList.toggle("car-details");
+    });
+
+    carDiv.appendChild(carNameHeading);
+    carDiv.appendChild(carBrandPara);
+    carDiv.appendChild(carColorPara);
+    carDiv.appendChild(carModelPara);
+    carDiv.appendChild(carhpPara);
+    carDiv.appendChild(carFuelPara);
+    carDiv.appendChild(readMoreButton);
+
+    carList.innerHTML = "";
+
+    carList.appendChild(carDiv);
+  }
+</script>
+
+</body>
+</html>  

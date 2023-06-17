@@ -1,0 +1,70 @@
+ <!DOCTYPE html>
+<html>
+<head>
+  <title>chp49-52</title>
+  <!-- =============================Form Submission ===================================-->
+  <h2>1. Form Submission</h2>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    .form-container {
+      max-width: 300px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .form-container input[type="text"],
+    .form-container input[type="email"],
+    .form-container input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+    .form-container input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Signup Form</h2>
+    <form id="signup-form">
+      <input type="text" name="name" placeholder="Name" required><br>
+      <input type="email" name="email" placeholder="Email" required><br>
+      <input type="password" name="password" placeholder="Password" required><br>
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+
+  <script>
+    $(document).ready(function() {
+      $('#signup-form').submit(function(event) {
+        event.preventDefault(); 
+
+        var formData = {
+          name: $('input[name="name"]').val(),
+          email: $('input[name="email"]').val(),
+          password: $('input[name="password"]').val()
+        };
+        var output = "<h2>Form Data:</h2>";
+        output += "<p><strong>Name:</strong> " + formData.name + "</p>";
+        output += "<p><strong>Email:</strong> " + formData.email + "</p>";
+        output += "<p><strong>Password:</strong> " + formData.password + "</p>";
+
+        $('.form-container').html(output);
+      });
+    });
+  </script>
+
+
+
+
+

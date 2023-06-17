@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<title>Modal</title>
+<head>
+    <style>
+        /* CSS for the modal */
+        #myModal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            padding-top: 100px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+
+        .modal-content img {
+            width: 100%;
+            height: auto;
+        }
+            /* CSS for the close button */
+    .close {
+      color: white;
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 30px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    </style>
+</head>
+
+<body>
+    <!-- The Modal -->
+    <div id="myModal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <!-- The Image Gallery -->
+    <div id="imageGallery">
+        <img src="./images1.jpg" onclick="openModal(this)" alt="Image 1">
+        <img src="./images2.jpg" onclick="openModal(this)" alt="Image 2">
+        <img src="./images3.jpg" onclick="openModal(this)" alt="Image 3">
+        <img src="./images4.jpg" onclick="openModal(this)" alt="Image 4">
+    </div>
+
+    <script>
+        // Function to open the modal and display the clicked image
+        function openModal(image) {
+            var modal = document.getElementById("myModal");
+            var modalImage = document.getElementById("modalImage");
+
+            modal.style.display = "block";
+            modalImage.src = image.src;
+        }
+
+        // Function to close the modal
+    document.getElementsByClassName("close")[0].onclick = function() {
+      document.getElementById("myModal").style.display = "none";
+    }
+        // Add zoom functionality
+        modalImage.classList.remove("zoomed");
+        modalImage.classList.add("zoom");
+        modalImage.addEventListener("click", toggleZoom);
+
+
+        // Function to toggle zoom-in and zoom-out
+        function toggleZoom() {
+            var modalImage = document.getElementById("modalImage");
+            if (modalImage.classList.contains("zoom")) {
+                modalImage.classList.remove("zoom");
+                modalImage.classList.add("zoomed");
+            } else {
+                modalImage.classList.remove("zoomed");
+                modalImage.classList.add("zoom");
+            }
+        }
+
+        // Function to close the modal
+        document.getElementsByClassName("close")[0].onclick = function () {
+            document.getElementById("myModal").style.display = "none";
+        };
+    </script>
+</body>
+
+</html>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        p {
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <p id="zoomedText">Flowers are nature's fragrant marvels, captivating our senses with their delightful aromas. Their
+        fragrances, like sweet symphonies, evoke emotions and memories. Each flower boasts its unique scent, from the
+        intoxicating jasmine's romantic allure to the soothing lavender's calming embrace. Roses exude timeless
+        elegance, while lilies impart a sense of purity. Whether it's the vibrant citrus notes of a blooming orange
+        blossom or the exotic and spicy hints of a ylang-ylang, flowers' fragrances add a touch of magic to our lives,
+        filling the air with beauty and serenity.</p>
+    <button onclick="zoomIn()">Zoom In (+)</button>
+    <button onclick="zoomOut()">Zoom Out (-)</button>
+
+    <script>
+        var fontSize = 16; // Initial font size
+
+        function zoomIn() {
+            fontSize += 10;
+            updateFontSize();
+        }
+
+        function zoomOut() {
+            if (fontSize > 10) {
+                fontSize -= 10;
+                updateFontSize();
+            }
+        }
+
+        function updateFontSize() {
+            var zoomedText = document.getElementById("zoomedText");
+            zoomedText.style.fontSize = fontSize + "px";
+        }
+    </script>
+</body>
+
+</html>

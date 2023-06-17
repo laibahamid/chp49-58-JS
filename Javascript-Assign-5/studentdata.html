@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Details Form</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: left;
+    }
+    .hidden-form {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h2>Student Details Form</h2>
+  <form id="studentForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" required><br><br>
+
+    <label for="age">Age:</label>
+    <input type="number" id="age" required><br><br>
+
+    <label for="grade">Grade:</label>
+    <input type="text" id="grade" required><br><br>
+
+    <input type="submit" value="Submit">
+  </form>
+
+  <br>
+  <h2>Student Details</h2>
+  <table id="studentTable">
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Grade</th>
+      <th>Action</th>
+    </tr>
+  </table>
+
+  <form id="editForm" class="hidden-form">
+    <label for="editName">Name:</label>
+    <input type="text" id="editName" required><br><br>
+
+    <label for="editAge">Age:</label>
+    <input type="number" id="editAge" required><br><br>
+
+    <label for="editGrade">Grade:</label>
+    <input type="text" id="editGrade" required><br><br>
+
+    <input type="submit" value="Save">
+    <input type="button" value="Cancel" onclick="cancelEdit()">
+  </form>
+
+  <script>
+    var editRowIndex = -1; // Index of the row being edited (-1 indicates no row being edited)
+
+    document.getElementById('studentForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Get form values
+      var name = document.getElementById('name').value;
+      var age = document.getElementById('age').value;
+      var grade = document.getElementById('grade').value;
+
+      if (editRowIndex === -1) {
+        // Add new row if not editing an existing row
+        addRow(name, age, grade);
+      } else {
+        // Update existing row if editing
+        updateRow(name, age, grade);
+        cancelEdit();
+      }
+
+      // Reset form
+      document.getElementById('studentForm').reset();
+    });
+
+    function addRow(name, age, grade) {
+      // Create a new row in the table
+      var table = document.getElementById('studentTable');
+      var newRow = table.insertRow(table.rows.length);
+
+      // Insert cells in the new row
+      var cell1 = newRow.insertCell(0);
+      var cell2 = newRow.insertCell(1);
+      var cell3 = newRow.insertCell(2);
+      var cell4 = newRow.insertCell(3);
+
+      // Set cell values
+      cell1.innerHTML = name;
+      cell2.innerHTML = age;
+      cell3.innerHTML = grade;
+      cell4.innerHTML = '<button onclick="editRow(this)">Edit</button> <button onclick="deleteRow(this)">Delete</button>';
+    }
+
+    function editRow(button) {
+      // Get the row index of the clicked edit button
+      var rowIndex = button.parentNode.parentNode.rowIndex;
+      var table = document.getElementById('studentTable');
+
+      // Get the values from the selected row
+      var name = table.rows[rowIndex].cells[0].innerHTML;
+      var age = table.rows[rowIndex].cells[1].innerHTML;
+      var grade = table.rows[rowIndex].cells[2].innerHTML;
+
+      // Populate the edit form with the selected row values
+      document.getElementById('editName').value = name;
+      document.getElementById('editAge').value = age;
+      document.getElementById('editGrade').value = grade;
+
+      // Show the edit form
+      document.getElementById('editForm').classList.remove('hidden-form');
+
+      // Store the index of the row being edited
+      editRowIndex = rowIndex;
+    }
+
+    function updateRow(name, age, grade) {
+      var table = document.getElementById('studentTable');
+
+      // Update the values in the selected row
+      table.rows[editRowIndex].cells[0].innerHTML = name;
+      table.rows[editRowIndex].cells[1].innerHTML = age;
+      table.rows[editRowIndex].cells[2].innerHTML = grade;
+    }
+
+    function deleteRow(button) {
+      // Get the row index of the clicked delete button
+      var rowIndex = button.parentNode.parentNode.rowIndex;
+      var table = document.getElementById('studentTable');
+
+      // Delete the row from the table
+      table.deleteRow(rowIndex);
+    }
+
+    function cancelEdit() {
+      // Hide the edit form and reset the editRowIndex
+      document.getElementById('editForm').classList.add('hidden-form');
+      editRowIndex = -1;
+    }
+  </script>
+</body>
+</html>
